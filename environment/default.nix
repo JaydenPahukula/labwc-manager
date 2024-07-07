@@ -10,7 +10,7 @@ with lib; {
     description = "Set environment variables";
   };
 
-  config = mkIf (config.programs.labwc.enable && (length config.programs.labwc.environment) > 0) {
+  config = mkIf (config.programs.labwc.enable && (length (attrNames config.programs.labwc.environment)) > 0) {
     xdg.configFile."labwc/environment".text = ''
       # labwc environment file
       ${concatStringsSep "\n" (mapAttrsToList (name: value: "${name}=${value}") config.programs.labwc.environment)}
