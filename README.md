@@ -6,6 +6,8 @@ Warning: This is an ongoing project and option implementation is subject to chan
 
 ## Usage:
 
+*Make sure you have labwc installed before beginning!*
+
 Add `labwc-manager` to your flake inputs:
 
 ```nix
