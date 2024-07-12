@@ -21,11 +21,12 @@
     ./tablet.nix
     ./theme.nix
     ./touch.nix
+    ./windowrules.nix
     ./windowswitcher.nix
   ];
 
   config = with lib; mkIf (config.programs.labwc.enable) {
-    xdg.configFile."labwc/rctest.xml".text = let
+    xdg.configFile."labwc/rc.xml".text = let
       
       # functions for pretty formatting
       toStr = obj:
@@ -141,12 +142,9 @@
           <repeatRate>${toStr cfg.keyboard.repeatRate}</repeatRate>
           <repeatDelay>${toStr cfg.keyboard.repeatDelay}</repeatDelay>
           ${indent 4 (formatList (x: ''
-            <keybind>
-              <key>${toStr x.key}</key>
-              <layoutDependant>${toStr x.layoutDependent}</layoutDependant>
+            <keybind key="${toStr x.key}" layoutDependent="${toStr x.layoutDependent}">
               ${indent 2 (formatList (y: ''
-                <action>
-                  <name>${toStr y.name}</name>
+                <action name="${toStr y.name}">
                   ${indent 2 (formatList (z: ''
                     <${z.name}>${toStr z.value}</${z.name}>
                   '') (mapAttrsToList (n: v: {name=n;value=v;}) (filterAttrs (n: v: n != "name") y)))}
@@ -168,10 +166,7 @@
             </context>
           '') (mapAttrsToList (n: v: {name=n;value=v;}) cfg.mouse.mousebinds))}${if cfg.mouse.default then "\n    <default/>" else ""}
         </mouse>
-        <touch>
-          <deviceName>${toStr cfg.touch.deviceName}</deviceName>
-          <mapToOutput>${toStr cfg.touch.mapToOutput}</mapToOutput>
-        </touch>
+        <touch deviceName="${toStr cfg.touch.deviceName}" mapToOutput="${toStr cfg.touch.mapToOutput}" />
         <tablet>
           <mapToOutput>${toStr cfg.tablet.mapToOutput}</mapToOutput>
           <rotate>${toStr cfg.tablet.rotate}</rotate>
@@ -183,10 +178,7 @@
             <height>${toStr cfg.tablet.area.height}</height>
           </area>
           ${indent 4 (formatList (x: ''
-            <map>
-              <button>${toStr x.button}</button>
-              <to>${toStr x.to}</to>
-            </map>
+            <map button="${toStr x.button}" to="${toStr x.to}" />
           '') (mapAttrsToList (name: value: {button=name;to=value;}) cfg.tablet.map))}
         </tablet>
         <libinput>
@@ -208,6 +200,19 @@
             </device>
           '') (mapAttrsToList (name: value: {category=name;vals=value;}) cfg.libinput))}
         </libinput>
+        <windowRules>
+          ${indent 4 (formatList (x: ''
+            <windowRule identifier="${toStr x.criteria.identifier}" title="${toStr x.criteria.title}" sandboxEngine="${toStr x.criteria.sandboxEngine}" sandboxAppId="${toStr x.criteria.sandboxAppId}" type="${toStr x.criteria.type}" matchOnce="${toStr x.criteria.matchOnce}">
+              <serverDecoration>${toStr x.properties.serverDecoration}</serverDecoration>
+              <skipTaskbar>${toStr x.properties.skipTaskbar}</skipTaskbar>
+              <skipWindowSwitcher>${toStr x.properties.skipWindowSwitcher}</skipWindowSwitcher>
+              <ignoreFocusRequest>${toStr x.properties.ignoreFocusRequest}</ignoreFocusRequest>
+              <ignoreConfigureRequest>${toStr x.properties.ignoreConfigureRequest}</ignoreConfigureRequest>
+              <fixedPosition>${toStr x.properties.fixedPosition}</fixedPosition>
+              ${formatList (y: "${formatAction y}\n") x.actions}
+            </windowRule>
+          '') cfg.windowRules )}
+        </windowRules>
         <menu>
           <ignoreButtonReleasePeriod>${toStr cfg.menu.ignoreButtonReleasePeriod}</ignoreButtonReleasePeriod>
         </menu>
