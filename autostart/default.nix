@@ -21,9 +21,9 @@ with lib; {
   };
 
   config = mkIf (config.programs.labwc.enable && (length config.programs.labwc.autostart) > 0) {
-    xdg.configFile."labwc/autostarttest".text = ''
+    xdg.configFile."labwc/autostart".text = ''
       # labwc autostart file
-      ${concatMapStrings (s: s+" >/dev/null 2>&1 &\n") config.programs.labwc.autostart}
+      ${concatMapStringsSep "\n" (s: s+" >/dev/null 2>&1 &") config.programs.labwc.autostart}
     '';
   };
   
