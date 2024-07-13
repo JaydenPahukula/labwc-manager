@@ -21,10 +21,13 @@ with lib; {
   };
 
   config = mkIf (config.programs.labwc.enable && (length config.programs.labwc.autostart) > 0) {
-    xdg.configFile."labwc/autostart".text = ''
-      # labwc autostart file
-      ${concatMapStringsSep "\n" (s: s+" >/dev/null 2>&1 &") config.programs.labwc.autostart}
-    '';
+    xdg.configFile."labwc/autostart" = {
+      text = ''
+        # labwc autostart file
+        ${concatMapStringsSep "\n" (s: s+" >/dev/null 2>&1 &") config.programs.labwc.autostart}
+      '';
+      executable = true;
+    };
   };
   
 }
