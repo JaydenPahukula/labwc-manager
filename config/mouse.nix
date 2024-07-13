@@ -35,97 +35,7 @@
           };
         };
       }));
-      default = {
-        TitleBar = [
-          { button="Left"; action="Press"; actions=[
-            { name="Focus"; }
-            { name="Raise"; }
-          ];}
-          { button="Right"; action="Click"; actions = [
-            { name="Focus"; }
-            { name="Raise"; }
-          ];}
-          { direction="Up"; action="Scroll"; actions = [
-            { name="Unshade"; }
-            { name="Focus"; }
-          ];}
-          { direction="Down"; action="Scroll"; actions = [
-            { name="Unshade"; }
-            { name="Focus"; }
-          ];}
-        ];
-        Title = [
-          { button="Left"; action="Drag"; actions = [
-            { name="Move"; }
-          ];}
-          { button="Left"; action="DoubleClick"; actions = [
-            { name="ToggleMaximize"; }
-          ];}
-          { button="Right"; action="Click"; actions = [
-            { name="ShowMenu"; menu="client_menu"; }
-          ];}
-        ];
-        Maximize = [
-          { button="Left"; action="Click"; actions = [
-            { name="ToggleMaximize"; }
-          ];}
-          { button="Right"; action="Click"; actions = [
-            { name="ToggleMaximize"; direction="horizontal"; }
-          ];}
-          { button="Middle"; action="Click"; actions = [
-            { name="ToggleMaximize"; direction="vertical"; }
-          ];}
-        ];
-        WindowMenu = [
-          { button="Left"; action="Click"; actions = [
-            { name="ShowMenu"; menu="client_menu"; }
-          ];}
-          { button="Right"; action="Click"; actions = [
-            { name="ShowMenu"; menu="client_menu"; }
-          ];}
-        ];
-        Iconify = [
-          { button="Left"; action="Click"; actions = [
-            { name="Iconify"; }
-          ];}
-        ];
-        Close = [
-          { button="Left"; action="Click"; actions = [
-            { name="Close"; }
-          ];}
-        ];
-        Client = [
-          { button="Left"; action="Press"; actions = [
-            { name="Focus"; }
-            { name="Raise"; }
-          ];}
-          { button="Middle"; action="Press"; actions = [
-            { name="Focus"; }
-            { name="Raise"; }
-          ];}
-          { button="Right"; action="Press"; actions = [
-            { name="Focus"; }
-            { name="Raise"; }
-          ];}
-        ];
-        Root = [
-          { button="Left"; action="Press"; actions = [
-            { name="ShowMenu"; menu="root_menu"; }
-          ];}
-          { button="Right"; action="Press"; actions = [
-            { name="ShowMenu"; menu="root_menu"; }
-          ];}
-          { button="Middle"; action="Press"; actions = [
-            { name="ShowMenu"; menu="root_menu"; }
-          ];}
-          { direction="Up"; action="Scroll"; actions = [
-            { name="GoToDesktop"; to="left"; wrap=true; }
-          ];}
-          { direction="Down"; action="Scroll"; actions = [
-            { name="GoToDesktop"; to="right"; wrap=true; }
-          ];}
-        ];
-      };
+      default = {};
       description = ''
         Multiple <mousebind> can exist within one <context>; and multiple <action> can exist within one <mousebind>.
 
@@ -180,7 +90,7 @@
     };
     default = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Load default mousebinds. This is an addition to the openbox specification and provides a way to keep
         config files simpler whilst allowing user specific binds. Note that if no rc.xml is found, or if no <mouse><mousebind>
         entries exist, the same default mousebinds will be loaded even if the <default /> element is not provided.";
