@@ -25,6 +25,14 @@
             type = types.bool;
             default = false;
           };
+          onRelease = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          allowWhenLocked = mkOption {
+            type = types.bool;
+            default = false;
+          };
           actions = mkOption {
             type = types.listOf (types.addCheck (types.attrsOf types.str) (x: hasAttr "name" x));
           };

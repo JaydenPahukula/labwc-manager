@@ -142,7 +142,7 @@
           <repeatRate>${toStr cfg.keyboard.repeatRate}</repeatRate>
           <repeatDelay>${toStr cfg.keyboard.repeatDelay}</repeatDelay>
           ${indent 4 (formatList (x: ''
-            <keybind key="${toStr x.key}" layoutDependent="${toStr x.layoutDependent}">
+            <keybind key="${toStr x.key}" layoutDependent="${toStr x.layoutDependent}" onRelease="${toStr x.onRelease}" allowWhenLocked="${toStr x.allowWhenLocked}">
               ${indent 2 (formatList (y: ''
                 <action name="${toStr y.name}">
                   ${indent 2 (formatList (z: ''
