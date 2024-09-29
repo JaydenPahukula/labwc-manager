@@ -18,7 +18,7 @@
       type = types.attrsOf (types.listOf (types.submodule {
         options = {
           button = mkOption {
-            type = types.enum [ "" "Left" "Middle" "Right" "Side" "Extra" "Forward" "Back" "Task" ]; 
+            type = types.nullOr types.str;
             default = "";
           };
           direction = mkOption {

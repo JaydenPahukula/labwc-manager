@@ -156,6 +156,7 @@
         <mouse>
           <doubleClickTime>${toStr cfg.mouse.doubleClickTime}</doubleClickTime>
           <scrollFactor>${toStr cfg.mouse.scrollFactor}</scrollFactor>
+          ${if cfg.mouse.default then "<default/>" else ""}
           ${indent 4 (formatList (x: ''
             <context name="${toStr x.name}">
               ${indent 2 (formatList (y: ''
@@ -164,7 +165,7 @@
                 </mousebind>
               '') x.value)}
             </context>
-          '') (mapAttrsToList (n: v: {name=n;value=v;}) cfg.mouse.mousebinds))}${if cfg.mouse.default then "\n    <default/>" else ""}
+          '') (mapAttrsToList (n: v: {name=n;value=v;}) cfg.mouse.mousebinds))}
         </mouse>
         <touch deviceName="${toStr cfg.touch.deviceName}" mapToOutput="${toStr cfg.touch.mapToOutput}" />
         <tablet>
