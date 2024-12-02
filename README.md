@@ -1,12 +1,12 @@
+_WARNING: I no longer use labwc personally, so I've stopped updating this project. It works but there are many features that have not really been tested (and won't be). Use at your own risk, and feel free to open PRs._
+
 # Labwc Manager
 
 Manage your labwc configuration with Nix Home Manager!
 
-Warning: This is an ongoing project and option implementation is subject to change. I use this module in my own home manager configuration, but there are parts that are not thoroughly tested, so let me know or open an issue if you find a bug.
-
 ## Usage:
 
-*Make sure you have labwc installed before beginning!*
+_Make sure you have labwc installed before beginning!_
 
 Add `labwc-manager` to your flake inputs:
 
